@@ -1,10 +1,7 @@
-require(rentrez)
 library(rentrez)
 library(xml2)
 library(rvest)
 library(stringr)
-
-test <- findLocation(10319)
 
 getAuthInfo <- function(genomeID){
   linked <- entrez_link(dbfrom = "genome", id = genomeID, db ="pubmed") #finds linked pubmed articles to genome entry
