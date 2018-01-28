@@ -1,0 +1,51 @@
+
+Achim Zeileis and Gabor Grothendieck (2005). zoo:
+  S3 Infrastructure for Regular and Irregular Time
+  Series. Journal of Statistical Software, 14(6),
+  1-27. doi:10.18637/jss.v014.i06
+
+Charif, D. and Lobry, J.R. (2007)
+
+David Winter (2017). rentrez: Entrez in R. R
+  package version 1.1.0.
+  https://CRAN.R-project.org/package=rentrez
+
+Duncan Temple Lang and the CRAN Team (2017). XML:
+  Tools for Parsing and Generating XML Within R and
+  S-Plus. R package version 3.98-1.9.
+  https://CRAN.R-project.org/package=XML
+
+D. Kahle and H. Wickham. ggmap: Spatial Visualization with ggplot2. The R Journal, 5
+  (1), 144-161. URL http://journal.r-project.org/archive/2013-1/kahle-wickham.pdf
+
+H. Wickham. ggplot2: Elegant Graphics for Data
+  Analysis. Springer-Verlag New York, 2009.\
+
+Hadley Wickham (2016). rvest: Easily Harvest
+  (Scrape) Web Pages. R package version 0.3.2.
+  https://CRAN.R-project.org/package=rvest
+
+Hadley Wickham (2017). stringr: Simple, Consistent
+  Wrappers for Common String Operations. R package
+  version 1.2.0.
+  https://CRAN.R-project.org/package=stringr
+
+Hadley Wickham, James Hester and Jeroen Ooms
+  (2018). xml2: Parse XML. R package version 1.2.0.
+  https://CRAN.R-project.org/package=xml2
+
+Luke Tierney, A. J. Rossini, Na Li and H. Sevcikova
+  (2016). snow: Simple Network of Workstations. R
+  package version 0.4-2.
+  https://CRAN.R-project.org/package=snow
+
+Microsoft and Steve Weston (2017). foreach:
+  Provides Foreach Looping Construct for R. R package
+  version 1.4.4.
+  https://CRAN.R-project.org/package=foreach
+
+Winston Chang, Joe Cheng, JJ Allaire, Yihui Xie and
+  Jonathan McPherson (2017). shiny: Web Application
+  Framework for R. R package version 1.0.5.
+  https://CRAN.R-project.org/package=shiny
+
