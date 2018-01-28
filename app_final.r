@@ -124,11 +124,11 @@ server <- function(input, output) {
             htmlRead = read_html((paste0("https://www.ncbi.nlm.nih.gov/pubmed/",i)))#downloads html of pubmed page
             authorInfo <- as.character(xml_find_all(htmlRead, ".//dd")[1]) #finds author information
             #sanitize location string before grepping
-            badChars = list(    'S'='S', 's'='s', 'Z'='Z', 'z'='z', 'À'='A', 'Á'='A', 'Â'='A', 'Ã'='A', 'Ä'='A', 'Å'='A', 'Æ'='A', 'Ç'='C', 'È'='E', 'É'='E',
-                                'Ê'='E', 'Ë'='E', 'Ì'='I', 'Í'='I', 'Î'='I', 'Ï'='I', 'Ñ'='N', 'Ò'='O', 'Ó'='O', 'Ô'='O', 'Õ'='O', 'Ö'='O', 'Ø'='O', 'Ù'='U',
-                                'Ú'='U', 'Û'='U', 'Ü'='U', 'İ'='Y', 'Ş'='B', 'ß'='Ss', 'à'='a', 'á'='a', 'â'='a', 'ã'='a', 'ä'='a', 'å'='a', 'æ'='a', 'ç'='c',
-                                'è'='e', 'é'='e', 'ê'='e', 'ë'='e', 'ì'='i', 'í'='i', 'î'='i', 'ï'='i', 'ğ'='o', 'ñ'='n', 'ò'='o', 'ó'='o', 'ô'='o', 'õ'='o',
-                                'ö'='o', 'ø'='o', 'ù'='u', 'ú'='u', 'û'='u', 'ı'='y', 'ı'='y', 'ş'='b', 'ÿ'='y' )
+            badChars = list(    'S'='S', 's'='s', 'Z'='Z', 'z'='z', 'Ã€'='A', 'Ã'='A', 'Ã‚'='A', 'Ãƒ'='A', 'Ã„'='A', 'Ã…'='A', 'Ã†'='A', 'Ã‡'='C', 'Ãˆ'='E', 'Ã‰'='E',
+                                'ÃŠ'='E', 'Ã‹'='E', 'ÃŒ'='I', 'Ã'='I', 'Ã'='I', 'Ã'='I', 'Ã‘'='N', 'Ã’'='O', 'Ã“'='O', 'Ã”'='O', 'Ã•'='O', 'Ã–'='O', 'Ã˜'='O', 'Ã™'='U',
+                                'Ãš'='U', 'Ã›'='U', 'Ãœ'='U', 'Ã'='Y', 'Ã'='B', 'ÃŸ'='Ss', 'Ã '='a', 'Ã¡'='a', 'Ã¢'='a', 'Ã£'='a', 'Ã¤'='a', 'Ã¥'='a', 'Ã¦'='a', 'Ã§'='c',
+                                'Ã¨'='e', 'Ã©'='e', 'Ãª'='e', 'Ã«'='e', 'Ã¬'='i', 'Ã­'='i', 'Ã®'='i', 'Ã¯'='i', 'Ã°'='o', 'Ã±'='n', 'Ã²'='o', 'Ã³'='o', 'Ã´'='o', 'Ãµ'='o',
+                                'Ã¶'='o', 'Ã¸'='o', 'Ã¹'='u', 'Ãº'='u', 'Ã»'='u', 'Ã½'='y', 'Ã½'='y', 'Ã¾'='b', 'Ã¿'='y' )
             
             authorInfo <- chartr(paste(names(badChars), collapse=''),
                                  paste(badChars, collapse=''),
@@ -156,7 +156,7 @@ server <- function(input, output) {
               opts <- list(progress = progress)
               lst = foreach(i = 1:length(returned_query$req), 
                             .packages = "seqinr",  .options.snow = opts) %dopar% {
-                              choosebank(db)
+                              choosebank(input$dbin)
                               sp_name <- paste0("SP=", name)
                               returned_query <- query(sp_name)
                               one_annot <- getAnnot(returned_query$req[i])
