@@ -10,7 +10,11 @@ if(!require(XML)){
 #if(!require(ggplot2)){
 #  install.packages("ggplot2")
 #} 
+install.packages("doSNOW")
 #INSTALLS ABOVE
+
+library("foreach")
+library("doSnow")
 
 #libs to include
 library(ggplot2)
@@ -141,14 +145,32 @@ server <- function(input, output) {
           withProgress(
             message = 'Querying...',
             value = 0,
-            {progBar <- txtProgressBar(min = 0, max = length(returned_query$req), style = 3)
-            lst = list()
-            woop <-length(returned_query$req)
-            for(i in 1:length(returned_query$req)){
-              one_annot <- getAnnot(returned_query$req[i])
-              lst[[i]] <- one_annot[[1]]
-              setTxtProgressBar(progBar, i)
-              incProgress(1/woop)
+            {
+                cl <- makeCluster(2) # create a cluster with 2 cores
+                registerDoSNOW(cl) # register the cluster
+                iterations <- length(returned_query$req)
+                progBar <- txtProgressBar(min = 0, max = length(returned_query$req), style = 3)
+                progress <- function(n) setTxtProgressBar(progBar, n)
+                opts <- list(progress = progress)
+                lst = foreach(i = 1:length(returned_query$req), 
+                              .packages = "seqinr",  .options.snow = opts) %dopar% {
+                                choosebank(db)
+                                sp_name <- paste0("SP=", name)
+                                returned_query <- query(sp_name)
+                                one_annot <- getAnnot(returned_query$req[i])
+                                return(one_annot)
+                                }
+                close(progBar)
+                stopCluster(cl)
+           
+           #   progBar <- txtProgressBar(min = 0, max = length(returned_query$req), style = 3)
+            #lst = list()
+            #woop <-length(returned_query$req)
+            #for(i in 1:length(returned_query$req)){
+#              one_annot <- getAnnot(returned_query$req[i])
+#              lst[[i]] <- one_annot[[1]]
+#              setTxtProgressBar(progBar, i)
+#              incProgress(1/woop)
             }})
           
           date_df <- as.data.frame( matrix(ncol = 2 ))
@@ -156,7 +178,7 @@ server <- function(input, output) {
           colnames(date_df) <-  c("Month", "Year")
           
           for(i in 1:length(lst)){
-            line_one <- gsub("\\s+", " ", lst[[i]][1])
+            line_one <- gsub("\\s+", " ", lst[[i]][[1]][1])
             split_line <- strsplit(line_one, " ")
             date <- split_line[[1]][length(split_line[[1]])]
             ac_num <- split_line[[1]][2]
