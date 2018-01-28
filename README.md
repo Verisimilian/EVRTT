@@ -12,3 +12,9 @@ originated from this location.
 
 EVRTT is capable of running on a web server and provides an easy-to-use GUI, while also supporting 
 multithreading for processing large datasets. 
+
+![GitHub Logo](/images/Mononegairales_trends_over_time)
+Format: ![Alt Text](url)
+
+![GitHub Logo](/images/Mononegairales_date)
+Format: ![Alt Text](url)
