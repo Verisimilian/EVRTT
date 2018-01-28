@@ -23,8 +23,8 @@ create_trend <- function(db, name){
   
   colnames(date_df) <-  c("Month", "Year")
   
-  for(i in 1:length(all_annot)){
-    line_one <- gsub("\\s+", " ", all_annot[[i]][1])
+  for(i in 1:length(lst)){
+    line_one <- gsub("\\s+", " ", lst[[i]][1])
     split_line <- strsplit(line_one, " ")
     date <- split_line[[1]][length(split_line[[1]])]
     ac_num <- split_line[[1]][2]
